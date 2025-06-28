@@ -1,0 +1,24 @@
+[project]
+name = "travel-planner-agent-adk"
+version = "0.1.0"
+description = "Travel Planner Agent using Google ADK for orchestrating travel planning tasks."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # Shared ADK & A2A Dependencies
+    "google-adk>=1.2.1",
+    "nest-asyncio>=1.6.0",
+    "python-dotenv",
+    "click",
+    "uvicorn",
+    "google-generativeai",
+    "httpx",
+    "requests",
+    "groq",
+    "langchain-groq",
+    "fastapi>=0.115.14",
+    "a2a-sdk>=0.2.9",
+]
+
+[project.scripts]
+adk = "google.adk.cli:main" 

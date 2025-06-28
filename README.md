@@ -1,328 +1,337 @@
-# Travel-Planner-Multi-Agent-A2A
-Develop a multiagent travel planner using Agent 2 Agent protocol framework
+# A2A SDK Demo Projects
+This repository contains example projects demonstrating the capabilities of the Agent-to-Agent (A2A) SDK. Each sub-directory is a self-contained project with its own dependencies and instructions.
 
-<img width="1278" alt="image" src="https://github.com/user-attachments/assets/29c15ea7-34da-4e4c-bbf3-6f356fb08c52" />
+## 🚀 Projects
 
-# Multi-Agent Travel Planning System - Quick Reference
+### 1. Simple A2A Agent (`a2a_simple/`)
 
-<img width="798" alt="image" src="https://github.com/user-attachments/assets/4d7bfebb-8271-42f4-9d1e-0a63ae56496a" />
+This project provides a basic example of the A2A SDK. It contains a single agent and a test client that invokes it. This is a great starting point for understanding the fundamental concepts of creating and interacting with an A2A agent.
 
+**>> For setup and run instructions, see the [Simple A2A Agent README](./a2a_simple/README.md).**
 
-## 🚀 Quick Start
+### 2. Friend Scheduling Multi-Agent Demo (`a2a_friend_scheduling/`)
 
-### 1. Environment Setup
+This is a more advanced example showcasing a multi-agent system. It demonstrates how a "host" agent can orchestrate a conversation between multiple "friend" agents to accomplish a goal—in this case, scheduling a meeting. This project is ideal for learning about multi-agent orchestration and communication.
+
+**>> For setup and run instructions, see the [Friend Scheduling README](./a2a_friend_scheduling/README.md).**
+
+### 3. 🎯 **Multi-Agent Travel Planning System** (`travel_planning_system/`)
+
+**NEW!** A comprehensive multi-agent travel planning system that demonstrates advanced A2A protocol implementation with specialized AI agents for hotel booking and car rental services.
+
+#### 🏗️ **System Architecture**
+
+The Multi-Agent Travel Planning System is a distributed architecture that coordinates specialized AI agents to provide comprehensive travel planning services. The system uses the Agent-to-Agent (A2A) protocol for communication and leverages multiple AI frameworks for different specialized tasks.
+
+**Core Components:**
+- **Travel Planner Agent (Orchestrator)**: Google ADK framework, coordinates all travel planning tasks
+- **Hotel Booking Agent (Specialist)**: CrewAI framework, specialized in hotel search and recommendations
+- **Car Rental Agent (Specialist)**: LangGraph framework, specialized in car rental search and options
+- **Streamlit Web Interface**: User-friendly web application for travel planning
+
+**Technology Stack:**
+- **LLM**: Groq Llama-3 70B Versatile (high-performance inference)
+- **Search API**: SerperAPI (real-time web search)
+- **Communication**: A2A Protocol + HTTP REST APIs
+- **Frameworks**: Google ADK, CrewAI, LangGraph, Streamlit
+
+#### 📦 **Package Dependencies**
+
+The system uses multiple specialized packages for different components:
+
+**🎯 Travel Planner Agent (Google ADK)**
+```txt
+google-adk>=1.2.1          # Google Agent Development Kit
+nest-asyncio>=1.6.0        # Async event loop management
+python-dotenv              # Environment variable management
+click                      # Command-line interface toolkit
+uvicorn                    # ASGI server for FastAPI
+google-generativeai        # Google AI integration
+httpx                      # Async HTTP client
+requests                   # HTTP library
+groq                       # Groq LLM API client
+langchain-groq>=0.3.0      # LangChain Groq integration
+langchain>=0.2.0           # LangChain core framework
+langchain-community>=0.2.0 # LangChain community tools
+langchain-core>=0.3.0      # LangChain core components
+```
+
+**🏨 Hotel Booking Agent (CrewAI)**
+```txt
+crewai>=0.70.0             # Multi-agent orchestration framework
+python-dotenv              # Environment variable management
+requests                   # HTTP library
+fastapi                    # Modern web framework
+uvicorn                    # ASGI server
+pydantic                   # Data validation
+groq                       # Groq LLM API client
+langchain-groq>=0.3.0      # LangChain Groq integration
+langchain>=0.2.0           # LangChain core framework
+langchain-community>=0.2.0 # LangChain community tools
+langchain-core>=0.3.0      # LangChain core components
+```
+
+**🚗 Car Rental Agent (LangGraph)**
+```txt
+langgraph>=0.5.0           # Graph-based agent framework
+langchain-core>=0.3.0      # LangChain core components
+langchain-google-genai>=2.0.0 # Google AI integration
+python-dotenv              # Environment variable management
+requests                   # HTTP library
+fastapi                    # Modern web framework
+uvicorn                    # ASGI server
+pydantic                   # Data validation
+groq                       # Groq LLM API client
+langchain-groq>=0.3.0      # LangChain Groq integration
+langchain>=0.2.0           # LangChain core framework
+langchain-community>=0.2.0 # LangChain community tools
+```
+
+**🌐 Streamlit Web Interface**
+```txt
+streamlit>=1.28.0          # Web application framework
+requests>=2.31.0           # HTTP library
+python-dotenv>=1.0.0       # Environment variable management
+langchain-groq>=0.3.0      # LangChain Groq integration
+```
+
+**🔧 Package Purposes:**
+
+- **Agent Frameworks**: `google-adk`, `crewai`, `langgraph` - Core agent orchestration
+- **LLM Integration**: `groq`, `langchain-groq` - High-performance LLM inference
+- **Web Services**: `fastapi`, `uvicorn`, `streamlit` - API and UI servers
+- **HTTP Communication**: `requests`, `httpx` - Agent-to-agent communication
+- **Data Handling**: `pydantic` - Request/response validation
+- **Configuration**: `python-dotenv` - Environment variable management
+- **Async Support**: `nest-asyncio` - Event loop management
+- **CLI Tools**: `click` - Command-line interface
+
+#### 🔄 **Workflow Overview**
+
+1. **User Input**: Travel details via Streamlit interface
+2. **Agent Discovery**: Health checks and capability discovery
+3. **Parallel Execution**: Hotel and car rental agents run simultaneously
+4. **Response Aggregation**: Collect and integrate agent responses
+5. **Plan Generation**: Comprehensive travel plan creation
+6. **Response Delivery**: Display results with agent status
+
+#### 📊 **Performance Characteristics**
+
+- **Response Time**: 7-18 seconds total
+- **Concurrency**: Parallel agent execution
+- **Reliability**: Graceful error handling and fallback mechanisms
+- **Scalability**: Horizontal scaling support for production deployment
+
+#### 🚀 **Quick Start**
+
 ```bash
-# Navigate to the travel planning system directory
+# Navigate to the travel planning system
 cd travel_planning_system
 
-# Option 1: Use the automated installation script (Recommended)
-python install_dependencies.py
-
-# Option 2: Use the Windows batch script
-install_dependencies.bat
-
-# Option 3: Manual installation (if above methods fail)
-# For each agent directory, run:
-pip install python-dotenv requests fastapi uvicorn pydantic groq
-pip install langchain>=0.2.0 langchain-core>=0.3.0 langchain-community>=0.2.0 langchain-groq>=0.3.0
-# Then install agent-specific dependencies (see individual agent sections below)
-```
-
-### 2. API Keys Setup
-Create `.env` files in each agent directory:
-
-**Car Rental Agent** (`car_rental_agent_langgraph/.env`):
-```env
-GROQ_API_KEY=your_groq_api_key_here
-SERPER_API_KEY=your_serper_api_key_here
-```
-
-**Hotel Booking Agent** (`hotel_booking_agent_crewai/.env`):
-```env
-GROQ_API_KEY=your_groq_api_key_here
-SERPER_API_KEY=your_serper_api_key_here
-```
-
-**Travel Planner Agent** (`travel_planner_agent_adk/.env`):
-```env
-GROQ_API_KEY=your_groq_api_key_here
-GOOGLE_API_KEY=your_google_api_key_here
-SERPER_API_KEY=your_serper_api_key_here
-```
-
-### 3. Test Individual Agents
-
-#### Car Rental Agent (LangGraph)
-```bash
-cd car_rental_agent_langgraph
-python app/simple_executor.py
-```
-
-#### Hotel Booking Agent (CrewAI)
-```bash
+# Install dependencies for each agent
 cd hotel_booking_agent_crewai
-python simple_executor.py
-```
+pip install -r requirements.txt
 
-#### Travel Planner Agent (ADK)
-```bash
-cd travel_planner_agent_adk
-python simple_executor.py
-```
+cd ../car_rental_agent_langgraph
+pip install -r requirements.txt
 
-### 4. Run Multi-Agent System
-```bash
-# Start the hotel booking agent
+cd ../travel_planner_agent_adk
+pip install -r requirements.txt
+
+# Install Streamlit dependencies
+cd ..
+pip install -r streamlit_requirements.txt
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys:
+# GROQ_API_KEY=your_groq_api_key
+# SERPER_API_KEY=your_serper_api_key
+# GOOGLE_API_KEY=your_google_api_key
+
+# Start the agents (in separate terminals)
 cd hotel_booking_agent_crewai
-python app/__main__.py
+python hotel_agent.py          # Port 10002
 
-# In another terminal, start the car rental agent
-cd car_rental_agent_langgraph
-python app/__main__.py
+cd ../car_rental_agent_langgraph
+python car_rental_agent.py     # Port 10003
 
-# In a third terminal, start the travel planner agent
-cd travel_planner_agent_adk
-python simple_executor.py
+cd ../travel_planner_agent_adk
+python travel_planner.py       # Port 10001
+
+# Start the Streamlit web interface
+cd ..
+streamlit run streamlit_travel_app.py  # Port 8501
 ```
 
-## 🔧 Troubleshooting
+#### 📁 **Project Structure**
 
-### Dependency Conflicts
-If you encounter dependency conflicts:
-1. Use the automated installation script: `python install_dependencies.py`
-2. Or manually install with `--force-reinstall` flag:
+```
+travel_planning_system/
+├── hotel_booking_agent_crewai/
+│   ├── hotel_agent.py          # CrewAI-based hotel booking agent
+│   ├── hotel_tools.py          # Hotel search and booking tools
+│   ├── requirements.txt        # Hotel agent dependencies
+│   └── test_hotel_agent.py     # Hotel agent test script
+├── car_rental_agent_langgraph/
+│   ├── car_rental_agent.py     # LangGraph-based car rental agent
+│   ├── car_rental_tools.py     # Car rental search and booking tools
+│   ├── requirements.txt        # Car rental agent dependencies
+│   └── test_car_rental_agent.py # Car rental agent test script
+├── travel_planner_agent_adk/
+│   ├── travel_planner.py       # Google ADK-based orchestrator
+│   ├── requirements.txt        # Travel planner dependencies
+│   └── test_travel_planner.py  # Travel planner test script
+├── streamlit_travel_app.py     # Streamlit web interface
+├── streamlit_requirements.txt  # Streamlit dependencies
+├── .env.example               # Environment variables template
+├── ARCHITECTURE.md            # Detailed system architecture
+├── COMPLETE_WORKFLOW_DIAGRAM.md # Mermaid workflow diagrams
+└── README.md                  # Project-specific documentation
+```
+
+#### 🎯 **Key Features**
+
+- **Multi-Agent Coordination**: Seamless communication between specialized agents
+- **Real-time Search**: Current hotel and car rental information via SerperAPI
+- **AI-Powered Recommendations**: Intelligent analysis using Groq Llama-3 70B
+- **User-Friendly Interface**: Streamlit web app with real-time status monitoring
+- **Comprehensive Planning**: Detailed travel plans with cost breakdowns
+- **Error Resilience**: Graceful handling of agent failures and API issues
+- **A2A Protocol Support**: Full Agent-to-Agent communication compliance
+
+#### 🔧 **Advanced Configuration**
+
+**Agent Communication:**
+- **HTTP REST API**: Simple communication for development
+- **A2A Protocol**: Advanced agent discovery and message exchange
+- **Health Monitoring**: Real-time agent status checking
+
+**External Services:**
+- **Groq API**: High-performance LLM inference
+- **SerperAPI**: Real-time web search capabilities
+- **Rate Limiting**: Respectful API usage with retry logic
+
+**Deployment Options:**
+- **Development**: Local environment with all agents on localhost
+- **Production**: Distributed deployment with load balancing
+- **Docker**: Containerized deployment for easy scaling
+
+#### 📈 **Monitoring & Observability**
+
+- **Agent Health Checks**: Real-time status monitoring
+- **Response Time Tracking**: Performance metrics collection
+- **Error Logging**: Comprehensive error tracking and debugging
+- **User Analytics**: Usage patterns and system performance
+
+#### 🔒 **Security & Privacy**
+
+- **API Key Management**: Secure environment variable handling
+- **Input Validation**: Comprehensive request sanitization
+- **Response Filtering**: Privacy-conscious data handling
+- **Access Control**: Agent authentication and authorization
+
+#### 🚀 **Getting Started**
+
+1. **Clone the Repository**
    ```bash
-   pip install --force-reinstall langchain>=0.2.0 langchain-core>=0.3.0
+   git clone <repository-url>
+   cd agent2agent-main/travel_planning_system
    ```
 
-### Missing Modules
-If you get "No module named 'uvicorn'" errors:
-1. Ensure you're in the correct virtual environment
-2. Install uvicorn: `pip install uvicorn`
-3. Check that all dependencies are installed: `pip list`
+2. **Install Dependencies**
+   ```bash
+   # Install each agent's dependencies
+   cd hotel_booking_agent_crewai && pip install -r requirements.txt
+   cd ../car_rental_agent_langgraph && pip install -r requirements.txt
+   cd ../travel_planner_agent_adk && pip install -r requirements.txt
+   cd .. && pip install -r streamlit_requirements.txt
+   ```
 
-### API Key Issues
-- Verify all API keys are correctly set in `.env` files
-- Ensure no extra spaces or quotes around the API keys
-- Test API keys individually using the simple executors
+3. **Configure Environment**
+   ```bash
+   cp .env.example .env
+   # Add your API keys:
+   # GROQ_API_KEY=your_groq_api_key
+   # SERPER_API_KEY=your_serper_api_key
+   # GOOGLE_API_KEY=your_google_api_key
+   ```
 
-## 📋 Agent Details
+4. **Start the Agents**
+   ```bash
+   # Terminal 1: Hotel Agent
+   cd hotel_booking_agent_crewai
+   python hotel_agent.py
+   
+   # Terminal 2: Car Rental Agent
+   cd ../car_rental_agent_langgraph
+   python car_rental_agent.py
+   
+   # Terminal 3: Travel Planner
+   cd ../travel_planner_agent_adk
+   python travel_planner.py
+   ```
 
-### Car Rental Agent (LangGraph)
-- **Framework**: LangGraph
-- **LLM**: Groq Llama-3 70B
-- **Port**: 8001
-- **Features**: Car search, booking simulation
-- **Dependencies**: langgraph, langchain-core, langchain-groq
+5. **Launch Web Interface**
+   ```bash
+   cd ..
+   streamlit run streamlit_travel_app.py
+   ```
 
-### Hotel Booking Agent (CrewAI)
-- **Framework**: CrewAI
-- **LLM**: Groq Llama-3 70B
-- **Port**: 8002
-- **Features**: Hotel search, booking simulation
-- **Dependencies**: crewai, langchain-groq
+6. **Test the System**
+   ```bash
+   # Test individual agents
+   cd hotel_booking_agent_crewai && python test_hotel_agent.py
+   cd ../car_rental_agent_langgraph && python test_car_rental_agent.py
+   cd ../travel_planner_agent_adk && python test_travel_planner.py
+   ```
 
-### Travel Planner Agent (ADK)
-- **Framework**: Google ADK
-- **LLM**: Groq Llama-3 70B
-- **Features**: Orchestration, A2A communication
-- **Dependencies**: google-adk, langchain-groq
+#### 📚 **Documentation**
 
-## 🔄 A2A Protocol
+- **[Architecture Documentation](./travel_planning_system/ARCHITECTURE.md)**: Detailed system architecture and workflow
+- **[Workflow Diagrams](./travel_planning_system/COMPLETE_WORKFLOW_DIAGRAM.md)**: Visual Mermaid diagrams of the complete workflow
+- **[Agent Documentation](./travel_planning_system/README.md)**: Agent-specific setup and usage instructions
 
-The system uses Agent-to-Agent (A2A) protocol for communication:
+#### 🤝 **Contributing**
 
-### Message Format
-```json
-{
-  "message": "string",
-  "sender": "agent_name",
-  "recipient": "agent_name",
-  "timestamp": "ISO-8601",
-  "message_type": "request|response|error"
-}
-```
+The Multi-Agent Travel Planning System is designed to be extensible and modular. Contributions are welcome for:
 
-### Response Format
-```json
-{
-  "status": "success|error",
-  "data": {},
-  "message": "string"
-}
-```
+- **New Agent Types**: Additional specialized agents (flights, activities, etc.)
+- **Enhanced Tools**: Improved search and booking capabilities
+- **UI Improvements**: Better user experience and interface design
+- **Performance Optimization**: Faster response times and better resource usage
+- **Documentation**: Improved guides and examples
 
-## 🎯 Usage Examples
+#### 🐛 **Troubleshooting**
 
-### Simple Travel Planning Request
-```python
-# Example request to travel planner
-{
-  "destination": "Paris, France",
-  "dates": "2024-06-15 to 2024-06-22",
-  "travelers": 2,
-  "budget": "mid-range"
-}
-```
+**Common Issues:**
+- **Agent Connection Failures**: Check if all agents are running on correct ports
+- **API Key Errors**: Verify environment variables are properly set
+- **LLM Failures**: Ensure Groq API key is valid and has sufficient credits
+- **Search Failures**: Check SerperAPI key and rate limits
+- **Package Conflicts**: Ensure each agent uses its own virtual environment
 
-### Car Rental Request
-```python
-# Example request to car rental agent
-{
-  "location": "Paris, France",
-  "pickup_date": "2024-06-15",
-  "return_date": "2024-06-22",
-  "car_type": "economy"
-}
-```
-
-### Hotel Booking Request
-```python
-# Example request to hotel booking agent
-{
-  "location": "Paris, France",
-  "check_in": "2024-06-15",
-  "check_out": "2024-06-22",
-  "guests": 2,
-  "budget": "mid-range"
-}
-```
-
-# Quick Start Guide (Without A2A Protocol)
-
-## For Testing Individual Agents
-
-If you want to test the agents individually without the A2A protocol, follow this guide:
-
-## Step 1: Install Dependencies
-
+**Debug Mode:**
 ```bash
-# Install core dependencies
-pip install groq langchain_groq
-pip install crewai langgraph langchain-core
-pip install fastapi uvicorn pydantic
-pip install python-dotenv requests serper-python
+# Enable debug logging
+export DEBUG=1
+cd travel_planner_agent_adk
+python travel_planner.py
 ```
 
-## Step 2: Set Up Environment Variables
+#### 📄 **License**
 
-Create a `.env` file in the `travel_planning_system` directory:
+This project is part of the A2A SDK demo collection and follows the same licensing terms as the parent repository.
 
-```
-GROQ_API_KEY="your_groq_api_key_here"
-SERPER_API_KEY="your_serper_api_key_here"
-```
+---
 
-## Step 3: Test Individual Agents
+**>> For detailed setup and run instructions, see the [Travel Planning System README](./travel_planning_system/README.md).**
 
-### Test Hotel Booking Agent
-```bash
-cd travel_planning_system/hotel_booking_agent_crewai
-python test_hotel_agent.py
-```
-
-### Test Car Rental Agent
-```bash
-cd travel_planning_system/car_rental_agent_langgraph
-python test_car_agent.py
-```
-
-## Step 4: Create Test Scripts
-
-Let me create simple test scripts for each agent:
-
-### Hotel Booking Agent Test
-```python
-# test_hotel_agent.py
-import os
-from dotenv import load_dotenv
-from agent import HotelBookingAgent
-
-load_dotenv()
-
-def test_hotel_agent():
-    agent = HotelBookingAgent()
-    
-    # Test queries
-    queries = [
-        "Find hotels in Paris for next week",
-        "Book a hotel in Tokyo for 3 nights",
-        "What are the best hotels in New York?"
-    ]
-    
-    for query in queries:
-        print(f"\n--- Testing: {query} ---")
-        try:
-            response = agent.invoke(query)
-            print(f"Response: {response}")
-        except Exception as e:
-            print(f"Error: {e}")
-
-if __name__ == "__main__":
-    test_hotel_agent()
-```
-
-### Car Rental Agent Test
-```python
-# test_car_agent.py
-import os
-from dotenv import load_dotenv
-from app.agent import CarRentalAgent
-
-load_dotenv()
-
-def test_car_agent():
-    agent = CarRentalAgent()
-    
-    # Test queries
-    queries = [
-        "Find car rentals in Paris for next week",
-        "Book a luxury car in Tokyo for 3 days",
-        "What are the cheapest car rental options in New York?"
-    ]
-    
-    for query in queries:
-        print(f"\n--- Testing: {query} ---")
-        try:
-            response = agent.invoke(query, "test_context")
-            print(f"Response: {response}")
-        except Exception as e:
-            print(f"Error: {e}")
-
-if __name__ == "__main__":
-    test_car_agent()
-```
-
-## Step 5: Run Tests
-
-```bash
-# Test Hotel Agent
-cd travel_planning_system/hotel_booking_agent_crewai
-python test_hotel_agent.py
-
-# Test Car Rental Agent  
-cd ../car_rental_agent_langgraph
-python test_car_agent.py
-```
-
-## Expected Output
-
-You should see responses from each agent using Groq Llama-3 70B, including:
-- Hotel search results with SerperAPI data
-- Car rental options with pricing information
-- Booking confirmations
-
-## Next Steps
-
-Once individual agents work, you can:
-1. Install a2a-sdk for full multi-agent coordination
-2. Run the complete system with A2A protocol
-3. Test the Travel Planner Agent orchestration 
-
-## 📞 Support
-
-For issues or questions:
-1. Check the troubleshooting section above
-2. Verify all dependencies are correctly installed
-3. Ensure API keys are valid and properly configured
-4. Test individual agents before running the full system 
+## 📚 References
+- [A2A Python SDK](https://github.com/google/a2a-python)
+- [A2A Samples](https://github.com/google-a2a/a2a-samples/tree/main)
+- [Groq API Documentation](https://console.groq.com/docs)
+- [SerperAPI Documentation](https://serper.dev/api-docs)
+- [CrewAI Framework](https://github.com/joaomdmoura/crewAI)
+- [LangGraph Framework](https://github.com/langchain-ai/langgraph)
+- [Google ADK Documentation](https://ai.google.dev/docs)

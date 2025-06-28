@@ -1,0 +1,18 @@
+[project]
+name = "car-rental-agent-langgraph"
+version = "0.1.0"
+description = "Car Rental Agent using LangGraph for car rental research and booking."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "langgraph>=0.2.0",
+    "langchain-core>=0.3.0",
+    "langchain-google-genai>=2.0.0",
+    "python-dotenv",
+    "requests",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "groq",
+    "langchain-groq",
+] 

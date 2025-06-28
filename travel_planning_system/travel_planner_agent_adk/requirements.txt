@@ -1,0 +1,13 @@
+google-adk>=1.2.1
+nest-asyncio>=1.6.0
+python-dotenv
+click
+uvicorn
+google-generativeai
+httpx
+requests
+groq
+langchain-groq>=0.3.0
+langchain>=0.2.0
+langchain-community>=0.2.0
+langchain-core>=0.3.0 
